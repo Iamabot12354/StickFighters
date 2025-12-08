@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwjktsgu0re7l"]
+
+[ext_resource type="PackedScene" uid="uid://dv37ym0yit3hp" path="res://character_body_2d.tscn" id="1_3w5ul"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_s2ycm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3w5ul"]
+size = Vector2(2253, 208)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p3rf7"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(636, 371)
+scale = Vector2(1655.5, 839.5)
+mesh = SubResource("BoxMesh_s2ycm")
+
+[node name="fLOOR" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fLOOR"]
+position = Vector2(725.5, 654)
+shape = SubResource("RectangleShape2D_3w5ul")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="fLOOR"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(606, 696)
+rotation = 3.14159
+scale = Vector2(1619.56, -287.5)
+mesh = SubResource("BoxMesh_p3rf7")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_3w5ul")]
+position = Vector2(528, 351)
