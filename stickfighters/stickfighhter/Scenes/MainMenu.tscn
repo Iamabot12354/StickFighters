@@ -1,17 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://bt6lovjb2vn54"]
 
-[ext_resource type="Script" uid="uid://drjfplf1jtter" path="res://main_menu.gd" id="1_i26rj"]
+[ext_resource type="Script" uid="uid://drjfplf1jtter" path="res://Scripts/main_menu.gd" id="1_tt5f1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_kjwba"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_i26rj"]
 
 [node name="Node" type="Node"]
-script = ExtResource("1_i26rj")
+script = ExtResource("1_tt5f1")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color(0.385493, 0.385492, 0.385492, 1)
-position = Vector2(586, 347)
+position = Vector2(580.99994, 351.00003)
 scale = Vector2(1362, 756)
 mesh = SubResource("BoxMesh_kjwba")
 texture = SubResource("CanvasTexture_i26rj")
