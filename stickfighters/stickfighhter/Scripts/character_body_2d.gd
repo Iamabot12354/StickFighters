@@ -1,38 +1,66 @@
 extends CharacterBody2D
 
-
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+var SPEED = 0
+const JUMP_VELOCITY = -10
+var in_air = true
+var stopping = false
+var spd_cap = 10
+var gravity_spd = 15
 var animDir = "r"
 var animation = "idle"
 @onready var Sprite = $AnimatedSprite2D
 
 func _physics_process(delta):
 	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	if in_air: #gravity
+		gravity_spd += gravity_spd * delta
+		velocity.y += gravity_spd * delta
+	else:
+		gravity_spd = 15
 
 	# Handle jump.
-	if Input.is_action_just_pressed("P1-Jump") and is_on_floor():
+	if (Input.is_action_just_pressed("P1-Jump") or Input.is_key_pressed(KEY_W)) and not in_air: #jumping
 		velocity.y = JUMP_VELOCITY
+	
+	if (Input.is_action_just_pressed("P1-Right") or Input.is_key_pressed(KEY_A)): #moving
+		SPEED -=5 * delta
+	elif (Input.is_action_just_pressed("P1-Left") or Input.is_key_pressed(KEY_D)):
+		SPEED +=5 * delta
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	velocity.x = move_toward(velocity.x, spd_cap, SPEED) #handling acceleration
 	
+	if velocity.x < -1*spd_cap:
+		velocity.x = -1*spd_cap
 	
+	position.x += velocity.x #moving player
+	position.y += velocity.y
 	
-	var direction = Input.get_axis("P1-Left", "P1-Right")
-	if direction:
-		velocity.x = direction * SPEED
-		if velocity.x<0:
-			animDir = "l"
-			
-		elif velocity.x>0:
-			animDir = "r"
-			if velocity.x>150:
-				Sprite.animation = "Run"
-				
+	if not in_air: #handling decceleration
+		velocity.x /= 1.25
+		SPEED /= 1.25
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if stopping:
+		stopping = false
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		stopping = true
+	position.y -= velocity.y
+	velocity.y = 0
+	gravity_spd = 15
+	in_air = false
 	
-	move_and_slide()
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	in_air = true
+	if stopping:
+		#add condition here to run next two lines until you hit body entered again(while doesnt work)
+		position.y += 1
+		#in_air = false
+
+
+func _on_death_zone_body_entered(body: Node2D) -> void:
+	position.x = 500 #resseting on death
+	position.y = 500
+	velocity.x = 0
+	velocity.y = 0
+	SPEED = 0
+	

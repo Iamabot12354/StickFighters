@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcxabqddtj3vv"]
 
-[ext_resource type="Script" uid="uid://d3kvfk3jsktte" path="res://Scenes/Charecter_Assignment.gd" id="1_3w52j"]
-[ext_resource type="PackedScene" uid="uid://domogfncu4tnn" path="res://HeroSlot.tscn" id="2_sp8s6"]
+[ext_resource type="Script" uid="uid://d3kvfk3jsktte" path="res://Charecter_Assignment.gd" id="1_3w52j"]
+[ext_resource type="PackedScene" uid="uid://domogfncu4tnn" path="res://Scenes/HeroSlot.tscn" id="2_sp8s6"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_3w52j")

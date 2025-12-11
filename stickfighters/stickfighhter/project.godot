@@ -13,10 +13,12 @@ config_version=5
 config/name="StickFighhter"
 run/main_scene="uid://bt6lovjb2vn54"
 config/features=PackedStringArray("4.5", "Mobile")
+run/max_fps=60
 
 [display]
 
 window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
 
 [input]
 

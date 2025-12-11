@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwjktsgu0re7l"]
+[gd_scene load_steps=7 format=3 uid="uid://cwjktsgu0re7l"]
 
 [ext_resource type="PackedScene" uid="uid://dv37ym0yit3hp" path="res://Scenes/character_body_2d.tscn" id="1_3w5ul"]
 [ext_resource type="PackedScene" uid="uid://dvtp7vlgax43e" path="res://Scenes/P2.tscn" id="2_p3rf7"]
@@ -6,9 +6,11 @@
 [sub_resource type="BoxMesh" id="BoxMesh_s2ycm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3w5ul"]
-size = Vector2(2253, 208)
+size = Vector2(1666, 294)
 
 [sub_resource type="BoxMesh" id="BoxMesh_p3rf7"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dbljn"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -17,22 +19,35 @@ position = Vector2(756.00006, 378)
 scale = Vector2(1655.5, 839.5)
 mesh = SubResource("BoxMesh_s2ycm")
 
-[node name="fLOOR" type="StaticBody2D" parent="."]
+[node name="level" type="StaticBody2D" parent="."]
 position = Vector2(-63, 134)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fLOOR"]
-position = Vector2(704, 602)
+[node name="floor" type="Area2D" parent="level"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level/floor"]
+position = Vector2(822, 645)
 shape = SubResource("RectangleShape2D_3w5ul")
 
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="fLOOR"]
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="level"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(863.2051, 641.9997)
+position = Vector2(820.8362, 641.99976)
 rotation = 3.14159
-scale = Vector2(1907.9703, -287.5)
+scale = Vector2(1660.0343, -287.5)
 mesh = SubResource("BoxMesh_p3rf7")
+
+[node name="death zone" type="Area2D" parent="level"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level/death zone"]
+position = Vector2(842, 893)
+shape = SubResource("WorldBoundaryShape2D_dbljn")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_3w5ul")]
 position = Vector2(528, 351)
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("2_p3rf7")]
 position = Vector2(840, 379)
+script = null
+
+[connection signal="body_entered" from="level/floor" to="CharacterBody2D" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="level/floor" to="CharacterBody2D" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="level/death zone" to="CharacterBody2D" method="_on_death_zone_body_entered"]
