@@ -92,7 +92,7 @@ texture = ExtResource("1_4a7aq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-9, -5)
-scale = Vector2(4.25, 4.25)
+position = Vector2(-16, 3.2)
+scale = Vector2(3.7500002, 3.7500002)
 sprite_frames = SubResource("SpriteFrames_gxlx5")
 frame_progress = 0.14250779

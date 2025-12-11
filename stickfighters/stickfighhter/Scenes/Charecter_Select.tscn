@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcxabqddtj3vv"]
 
-[ext_resource type="Script" uid="uid://d3kvfk3jsktte" path="res://Scenes/Charecter_Assignment.gd" id="1_3w52j"]
+[ext_resource type="Script" uid="uid://d3kvfk3jsktte" path="res://Scripts/Charecter_Assignment.gd" id="1_3w52j"]
 [ext_resource type="PackedScene" uid="uid://domogfncu4tnn" path="res://Scenes/HeroSlot.tscn" id="2_sp8s6"]
 
 [node name="Node2D" type="Node2D"]
@@ -15,7 +15,10 @@ offset_bottom = 73.0
 text = "Start
 "
 
-[node name="Node2D" parent="." instance=ExtResource("2_sp8s6")]
+[node name="1" parent="." instance=ExtResource("2_sp8s6")]
 position = Vector2(291, 99)
+
+[node name="2" parent="." instance=ExtResource("2_sp8s6")]
+position = Vector2(466, 99)
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
